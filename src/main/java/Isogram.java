@@ -1,3 +1,6 @@
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Collection;
 
 public class Isogram {
     /**
@@ -13,6 +16,25 @@ public class Isogram {
      * @return true if str is an isogram, false otherwise.
      */
     public boolean isIsogram(String str){
-        return false;
+
+        String strArray[] = str.split("");
+        Map<String, Integer> strMap = new HashMap<>();
+
+        for (String element : strArray) {
+
+            if (strMap.containsKey(element)) {
+                Integer count = strMap.get(element);
+                strMap.put(element, count + 1);
+            }
+            else {
+                strMap.put(element, 1);
+            }            
+        }
+
+        long strValues = strMap.values().stream()
+            .filter(value -> value > 1)
+            .count();
+        
+        return strValues > 0 ? false : true;
     }
 }
