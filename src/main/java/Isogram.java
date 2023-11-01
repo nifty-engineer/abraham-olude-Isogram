@@ -1,6 +1,5 @@
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Isogram {
     /**
@@ -18,23 +17,13 @@ public class Isogram {
     public boolean isIsogram(String str){
 
         String strArray[] = str.split("");
-        Map<String, Integer> strMap = new HashMap<>();
+        Set<String> strSet = new HashSet<>();
 
         for (String element : strArray) {
 
-            if (strMap.containsKey(element)) {
-                Integer count = strMap.get(element);
-                strMap.put(element, count + 1);
-            }
-            else {
-                strMap.put(element, 1);
-            }            
+            strSet.add(element);           
         }
 
-        long strValues = strMap.values().stream()
-            .filter(value -> value > 1)
-            .count();
-        
-        return strValues > 0 ? false : true;
+        return strSet.size() < strArray.length ? false : true;
     }
 }
